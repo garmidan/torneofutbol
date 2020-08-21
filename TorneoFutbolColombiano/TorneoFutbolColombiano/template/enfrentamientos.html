@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<title>Posiciones Futbol Colombiano</title>
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+<body>
+    <!-- Parte Cabezera -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <form action="/posiciones/">
+            <a class="navbar-brand" href=""><input type="submit" style="border: 0;" value="Posiciones" /></a>
+        </form>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="#"> Resultados<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Calendario</a>
+                <form action="/enfrentamientos/">
+                    <a class="nav-link" href="#"><input type="submit" style="border: 0;"
+                            value="Registrar Enfrentamientos" /></a>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Parte Central -->
+    <br />
+    <form action="/registropartidos/" method="POST" >
+        {% csrf_token %}
+        <div class="row col-md-12">
+            <div class="form-group col-md-5">
+                <label style="color: green;">Seleccionar Equipo Local</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="equipolocal">
+                    {% for equipo in listaequipo %}
+                    <option value="{{equipo.nombre}}">{{equipo.nombre}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <h4 style="text-align: center;margin: 35px 0px 0px 0px;">VS</h4>
+            </div>
+            <div class="form-group col-md-5">
+                <label style="color: green;">Seleccionar Equipo Visitante</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="equipovisitante">
+                    {% for equipo in listaequipo %}
+                    <option value="{{equipo.nombre}}">{{equipo.nombre}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br />
+        <div>
+            <label style="color: green;margin: 0px 0px 0px 350px;">Fecha del Partido</label>
+            <div class="form-group">
+                <input type="date" name="fechapartido" style="width: 50%;margin: 0px 0px 0px 350px;" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" style="width: 10%;margin: 0px 0px 0px 610px;"
+                class="form-control btn btn-success">Guardar</button>
+        </div>
+        <h1>Ratas el partido quedo para = {{fechapartido}}</h1>
+    </form>
+    <br />
+    {% for dato in listapartido %}
+    <div style="background-color: #F5F9F9 ;">{{dato.fecha_partido}}</div>
+    <br />
+    <div style="height: 50px;">
+        <h6 style="text-align: center;">{{dato.nombres_equipos}}</h6>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
