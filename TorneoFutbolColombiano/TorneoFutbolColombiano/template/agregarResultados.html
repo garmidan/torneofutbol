@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Posiciones Futbol Colombiano</title>
+<title>Resultados</title>
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -18,19 +18,17 @@
 <body>
     <!-- Parte Cabezera -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Posiciones</a>
+        <form action="/posiciones/">
+            <a class="navbar-brand" href=""><input type="submit" style="border: 0;" value="Posiciones" /></a>
+        </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <form action="/resultados/">
-                    <a class="nav-link" href="#"><input type="submit" style="border: 0;" value="Agregar Resultados" /></a>
-                </form>
-                <form action="/calendario/">
-                    <a class="nav-link" href="#"><input type="submit" style="border: 0;" value="Calendario" /></a>
-                </form>
+                <a class="nav-link active" href="#"> Resultados<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Calendario </a>
                 <form action="/enfrentamientos/">
                     <a class="nav-link" href="#"><input type="submit" style="border: 0;"
                             value="Registrar Enfrentamientos" /></a>
@@ -38,36 +36,27 @@
             </div>
         </div>
     </nav>
-    <br />
-    <h1 style="text-align: center;">Tabla de Posiciones</h1>
-    <br />
     <!-- Parte Central -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Pos</th>
-                <th scope="col">Pts</th>
-                <th scope="col">J</th>
-                <th scope="col">D</th>
-                <th scope="col">E</th>
-                <th scope="col">GF</th>
-                <th scope="col">GC</th>
-                <th scope="col">DG</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1 Atletico Nacional</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-        </tbody>
-    </table>
+    <form action="/agregarresultados/" method="POST">
+        {% csrf_token %}
+        
+        <br />
+        <h3 style="text-align: center;">Adicionar Resultado</h3>
+        <br />
+        {% for dato in listapartido %}
+        <div style="background-color: #F5F9F9 ;"> {{dato.fecha_partido}} estadio donde jugaron: {{dato.estadio_jugaran}}
+        </div>
+        <br />
+        <div style="height: 50px;margin: 0px 0px 0px 550px;">
+            <input type="text" value="{{dato.id}}" name="id" hidden/>
+            <!-- Button trigger modal -->
+            <a title="Si das click puedes agregar el resultado o modificar"><input type="submit" style="text-align: center;width: 50%;" style="border: 0;" 
+                data-target="#exampleModal" value="{{dato.local}} {{dato.resultado_local}} - {{dato.resultado_visitante}} {{dato.visitante}}"/>
+            </a>
+                
+        </div>
+        {% endfor %}
+    </form>
 </body>
 
 </html>

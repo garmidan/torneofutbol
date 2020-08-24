@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Posiciones Futbol Colombiano</title>
+<title>Resultados</title>
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -18,19 +18,17 @@
 <body>
     <!-- Parte Cabezera -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Posiciones</a>
+        <form action="/posiciones/">
+            <a class="navbar-brand" href=""><input type="submit" style="border: 0;" value="Posiciones" /></a>
+        </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <form action="/resultados/">
-                    <a class="nav-link" href="#"><input type="submit" style="border: 0;" value="Agregar Resultados" /></a>
-                </form>
-                <form action="/calendario/">
-                    <a class="nav-link" href="#"><input type="submit" style="border: 0;" value="Calendario" /></a>
-                </form>
+                <a class="nav-link active" href="#"> Resultados<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Calendario </a>
                 <form action="/enfrentamientos/">
                     <a class="nav-link" href="#"><input type="submit" style="border: 0;"
                             value="Registrar Enfrentamientos" /></a>
@@ -38,36 +36,38 @@
             </div>
         </div>
     </nav>
-    <br />
-    <h1 style="text-align: center;">Tabla de Posiciones</h1>
-    <br />
     <!-- Parte Central -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Pos</th>
-                <th scope="col">Pts</th>
-                <th scope="col">J</th>
-                <th scope="col">D</th>
-                <th scope="col">E</th>
-                <th scope="col">GF</th>
-                <th scope="col">GC</th>
-                <th scope="col">DG</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1 Atletico Nacional</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-        </tbody>
-    </table>
+    <br />
+
+    <form action="/agregarresultadofinal/" method="POST">
+        {% csrf_token %}
+        <h4 style="text-align: center;">En los cuadros pequeños escribir los resultados</h4>
+        <div class="row col-md-12" style="width: 70%; margin: 0px 0px 0px 250px;">
+            {% for dato in addresultado%}
+            <input type="text" hidden value="{{dato.id}}" name="idedit" />
+            <div class="form-group col-md-3">
+                <span class="form-control">{{dato.local}}</span>
+            </div>
+            <div class="form-group col-md-2">
+                <input type="number" name="resultlocal" required class="form-control">
+            </div>
+            <div class="form-group col-md-1">
+                <h5 style="text-align: center;">-</h5>
+            </div>
+            <div class="form-group col-md-2">
+                <input type="number" name="resultvisitante" required class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <span class="form-control">{{dato.visitante}}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="width: 70%; margin: 0px 0px 0px 450px;">
+            <input type="submit" class="btn btn-success" value="Guardar"/>
+        </div>
+        
+    </form>
+    </div>
 </body>
 
 </html>

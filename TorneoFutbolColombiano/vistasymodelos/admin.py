@@ -1,3 +1,9 @@
 from django.contrib import admin
+from vistasymodelos.models import Rol,Usuario,Estadio,Equipo,Partidos,Posiciones
 
-# Register your models here.
+admin.site.register(Rol)
+admin.site.register(Usuario)
+admin.site.register(Estadio)
+admin.site.register(Equipo)
+admin.site.register(Partidos)
+admin.site.register(Posiciones)
