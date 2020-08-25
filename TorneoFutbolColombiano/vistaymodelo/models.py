@@ -28,9 +28,15 @@ class Partidos(models.Model):
     estadio_jugaran = models.CharField(max_length=50)
     resultado_local = models.CharField(max_length=10, null=True)
     resultado_visitante = models.CharField(max_length=10, null=True)
+    fecha = models.CharField(max_length=10)
 
 class Posiciones(models.Model):
     puntos = models.CharField(max_length=100)
+    partidos_jugados = models.CharField(max_length=50)
+    victorias = models.CharField(max_length=50)
+    derrotas = models.CharField(max_length=50)
+    empates = models.CharField(max_length=50)
+    goles_a_favor = models.CharField(max_length=50)
+    goles_en_contra = models.CharField(max_length=50)
+    diferencia_goles = models.CharField(max_length=50)
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
-
-

@@ -15,14 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from vistasymodelos.views import posiciones,enfrentamientos,registropartidos, calendario, resultados, agregarresultados, agregarresultadofinal
+from vistaymodelo.views import posiciones,enfrentamientos, calendario, resultados, agregarresultados, agregarresultadofinal
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),   
     path('posiciones/', posiciones),
     path('enfrentamientos/', enfrentamientos),
-    path('registropartidos/', registropartidos),
     path('calendario/',calendario),
     path('resultados/', resultados),
     path('agregarresultados/',agregarresultados),
-    path('agregarresultadofinal/', agregarresultadofinal)
+    path('agregarresultadofinal/', agregarresultadofinal),
 ]

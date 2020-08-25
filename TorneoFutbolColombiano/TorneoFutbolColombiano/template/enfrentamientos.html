@@ -31,68 +31,34 @@
                 <a class="nav-link" href="#">Calendario</a>
                 <form action="/enfrentamientos/">
                     <a class="nav-link" href="#"><input type="submit" style="border: 0;"
-                            value="Registrar Enfrentamientos" /></a>
+                            value="Enfrentamientos" /></a>
                 </form>
             </div>
         </div>
     </nav>
     <!-- Parte Central -->
     <br />
-    <form action="/registropartidos/" method="POST">
-        {% if mensaje == 1 %}
-        <div class="alert alert-danger" role="alert">
-            tener encuenta que el mismo equipo no se puede enfrentar a el!
-        </div>
-        {% endif%}
-        {% if mensaje == 2 %}
-        <div class="alert alert-danger" role="alert">
-            no se puede programar el partido para una fecha pasada!
-        </div>
-        {% endif%}
-        {% csrf_token %}
-        <div class="row col-md-12">
-            <div class="form-group col-md-5">
-                <label style="color: green;">Seleccionar Equipo Local</label>
-                <select class="form-control" required id="exampleFormControlSelect1" name="equipolocal">
-                    {% for equipo in listaequipo %}
-                    <option value="{{equipo.nombre}}">{{equipo.nombre}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2">
-                <h4 style="text-align: center;margin: 35px 0px 0px 0px;">VS</h4>
-            </div>
-            <div class="form-group col-md-5">
-                <label style="color: green;">Seleccionar Equipo Visitante</label>
-                <select class="form-control" required id="exampleFormControlSelect1" name="equipovisitante">
-                    {% for equipo in listaequipo %}
-                    <option value="{{equipo.nombre}}">{{equipo.nombre}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-        <br />
-        <div>
-            <label style="color: green;margin: 0px 0px 0px 350px;">Fecha del Partido</label>
-            <div class="form-group">
-                <input type="date" required name="fechapartido" style="width: 50%;margin: 0px 0px 0px 350px;"
-                    class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" style="width: 10%;margin: 0px 0px 0px 610px;"
-                class="form-control btn btn-success">Guardar</button>
-        </div>
-    </form>
+    <h3 style="text-align: center;">Enfrentamientos futbol colombiano </h3>
     <br />
-  
     {% for dato in listapartido %}
-    <div style="background-color: #F5F9F9 ;">{{dato.fecha_partido}} estadio: {{dato.estadio_jugaran}}</div>
+    <div style="background-color: #F5F9F9 ;">fecha = {{dato.fecha}} {{dato.fecha_partido}} estadio donde jugaran: {{dato.estadio_jugaran}}</div>
     <br />
     <div style="height: 50px;">
         <h6 style="text-align: center;">{{dato.local}} VS {{dato.visitante}}</h6>
     </div>
     {% endfor %}
+
+    <ul>
+        {% for datop in pares %}
+        <li>{{datop}}</li>
+        {% endfor %}
+    </ul>
+    <h3>Por aca los impares</h3>
+    <ul>
+        {% for datoi in impares %}
+        <li>{{datoi}}</li>
+        {% endfor %}
+    </ul>
 </body>
 
 </html>

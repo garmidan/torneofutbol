@@ -33,7 +33,7 @@
                 </form>
                 <form action="/enfrentamientos/">
                     <a class="nav-link" href="#"><input type="submit" style="border: 0;"
-                            value="Registrar Enfrentamientos" /></a>
+                            value="Enfrentamientos" /></a>
                 </form>
             </div>
         </div>
@@ -56,16 +56,18 @@
             </tr>
         </thead>
         <tbody>
+            {% for posicion in listaposiciones %}
             <tr>
-                <th scope="row">1 Atletico Nacional</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{forloop.counter}}- {{posicion.equipo.nombre}}</th>
+                <td>{{posicion.puntos}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </body>

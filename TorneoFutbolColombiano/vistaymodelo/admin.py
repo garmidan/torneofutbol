@@ -1,5 +1,5 @@
 from django.contrib import admin
-from vistasymodelos.models import Rol,Usuario,Estadio,Equipo,Partidos,Posiciones
+from vistaymodelo.models import Rol,Usuario,Estadio,Equipo,Partidos,Posiciones
 
 admin.site.register(Rol)
 admin.site.register(Usuario)
